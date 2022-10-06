@@ -1,0 +1,45 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: sboot-rest
+  namespace: demo-knative-advanced
+  #labels:
+    #app.kubernetes.io/part-of: rest-demo  
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "0"      
+        autoscaling.knative.dev/max-scale: "5"
+        autoscaling.knative.dev/target: "50"
+        autoscaling.knative.dev/scale-down-delay: "10s"
+    spec:
+      containerConcurrency: 0
+      containers:
+        - image: quay.io/naveenkendyala/quarkus-demo-springboot-todo:v1
+          name: app-container
+          envFrom:
+          - configMapRef:
+              name: quarkus-demo-springboot-todo-cm
+          - secretRef:
+              name: quarkus-demo-springboot-todo-secret
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "175Mi"
+            limits:
+              cpu: "500m"
+              memory: "350Mi"
+          livenessProbe:
+            httpGet:
+                port: 8080
+                path: /applive
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 2          
+          readinessProbe:
+            httpGet:
+              path: /appready
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30

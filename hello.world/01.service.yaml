@@ -1,0 +1,10 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: knative-hello
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: quay.io/naveenkendyala/quarkus-demo-quarkusjvm-hello:v1

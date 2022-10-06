@@ -1,0 +1,36 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: quarkus-hello
+  namespace: demo-knative
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "0"      
+        autoscaling.knative.dev/max-scale: "15"
+
+        # 
+        autoscaling.knative.dev/target: "20"
+        
+        # For example, if the containerConcurrency value is set to 10, and the target-utilization-percentage value is set to 70 percent, 
+        # the autoscaler creates a new replica when the average number of concurrent requests across all existing replicas reaches 7. 
+        # Requests numbered 7 to 10 are still sent to the existing replicas, 
+        # but additional replicas are started in anticipation of being required after the containerConcurrency value is reached.
+        autoscaling.knative.dev/target-utilization-percentage: "70"
+    spec:
+      # A hard concurrency limit is a strictly enforced upper bound requests limit. 
+      # If concurrency reaches the hard limit, surplus requests are buffered and must wait until there is enough free capacity to execute the requests
+      # The default value is 0, which means that there is no limit on the number of simultaneous requests that are permitted to flow into one replica of the service at a time.
+      containerConcurrency: 10
+
+      containers:
+        - image: quay.io/naveenkendyala/quarkus-demo-quarkusjvm-hello:v1
+          name: app-container
+          resources:
+            limits:
+              cpu: 100m
+              memory: 150Mi
+            requests:
+              cpu: 50m
+              memory: 100Mi
