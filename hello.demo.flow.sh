@@ -41,7 +41,7 @@ hey -c 50 -z 20s https://hello-knative-demo-knative.apps.cluster-8d8g9.8d8g9.san
 kn revision list
 
 # Traffic Switching
-kn service update hello-knative --traffic version01=1 --traffic version01=99
+kn service update hello-knative --traffic version01=1 --traffic version02=99
 kn service update hello-knative --traffic hello-knative-00002=1 --traffic hello-knative-00001=99
 kn service update hello-knative --traffic hello-knative-00002=1 --traffic hello-knative-00001=99
 
