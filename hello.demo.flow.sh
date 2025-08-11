@@ -22,7 +22,7 @@ kn service create hello-knative --image="quay.io/naveenkendyala/quarkus-demo-qua
 kn service list
 
 # Send traffic and talk about the container concurrency
-hey -c 50 -z 10s https://hello-knative-demo-knative.apps.cluster-nfvjp.nfvjp.sandbox145.opentlc.com/api/hello
+hey -c 50 -z 10s https://hello-knative-demo-knative.apps.cluster-8d8g9.8d8g9.sandbox2115.opentlc.com/api/hello
 
 # Show kpa resources and talk about the concurrency
 oc get kpa
@@ -35,7 +35,7 @@ kn service update hello-knative --image="quay.io/naveenkendyala/quarkus-demo-qua
 kn revision list
 
 # Send traffic and show the increase in pod count
-hey -c 50 -z 20s https://hello-knative-demo-knative.apps.cluster-xvf46.xvf46.sandbox601.opentlc.com/api/hello
+hey -c 50 -z 20s https://hello-knative-demo-knative.apps.cluster-8d8g9.8d8g9.sandbox2115.opentlc.com/api/hello
 
 # Show revisions
 kn revision list
@@ -46,7 +46,7 @@ kn service update hello-knative --traffic hello-knative-00002=1 --traffic hello-
 kn service update hello-knative --traffic hello-knative-00002=1 --traffic hello-knative-00001=99
 
 # Send traffic and show the increase in pod count
-hey -c 50 -z 10s https://hello-knative-demo-knative.apps.cluster-xvf46.xvf46.sandbox601.opentlc.com/api/hello
+hey -c 50 -z 10s https://hello-knative-demo-knative.apps.cluster-8d8g9.8d8g9.sandbox2115.opentlc.com/api/hello
 
 # Talk about the scale down time that was different between the versions
 
@@ -55,7 +55,7 @@ hey -c 50 -z 10s https://hello-knative-demo-knative.apps.cluster-xvf46.xvf46.san
 # -c  Number of workers to run concurrently. Total number of requests cannot be smaller than the concurrency level. Default is 50.
 # -z  Duration of application to send requests. When duration is reached, application stops and exits. If duration is specified, n is ignored.
 # Examples: -z 10s -z 3m.
-hey -c 50 -z 10s https://hello-knative-demo-knative.apps.cluster-xvf46.xvf46.sandbox601.opentlc.com/api/hello
+hey -c 50 -z 10s https://hello-knative-demo-knative.apps.cluster-8d8g9.8d8g9.sandbox2115.opentlc.com/api/hello
 
 
 # Knative control plane
