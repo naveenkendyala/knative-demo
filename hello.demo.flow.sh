@@ -29,6 +29,9 @@ oc get kpa
 
 # Talk about revisions
 # Update the service to a newer revision
+# --scale-target int                  Recommendation for when to scale up based on the concurrent number of incoming request. Defaults to --concurrency-limit when given.
+# --scale-max int                     Maximum number of replicas.
+# --scale-window string               Duration to look back for making auto-scaling decisions. The service is scaled to zero if no request was received in during that time. (eg: 10s)
 kn service update hello-knative --image="quay.io/naveenkendyala/quarkus-demo-quarkusjvm-hello:v1" --scale-target=10 --scale-max=5 --scale-window="10s"
 
 # Show revisions
